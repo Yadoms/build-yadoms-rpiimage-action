@@ -1,18 +1,18 @@
 #!/bin/sh
-pwd
-ls -al
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 cd pi-gen
 
 # Generate FR image
-sudo cp ../config_fr ./config
+sudo cp $DIR/config_fr ./config
 
 # disable stage 3, 4 and 5
 sudo touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
 sudo touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
 # copy stage99
-sudo cp -rp ../stage99 .
+sudo cp -rp $DIR/stage99 .
 
 # generate image
 sudo ./build-docker.sh
