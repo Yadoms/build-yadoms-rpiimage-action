@@ -15,7 +15,7 @@ runs:
     - run: 'sudo apt-get install binfmt-support'
       name: 'Install prerequisites'
       shell: bash
-    - run: 'sh {{ github.action_path }}/gen_image.sh'
+    - run: 'sh ${{ github.action_path }}/gen_image.sh'
       name: 'Generate image'
       shell: bash
 branding:
