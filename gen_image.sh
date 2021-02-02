@@ -4,6 +4,8 @@ DIR="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 
 
 #retreive version from currently built file
+pwd
+ls -al
 export yadomsVersion=`ls builds/package/Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
 echo "Found Yadoms : $yadomsVersion"
 
