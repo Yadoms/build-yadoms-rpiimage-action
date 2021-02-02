@@ -2,6 +2,11 @@
 
 DIR="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 
+
+#retreive version from currently built file
+export yadomsVersion=`ls builds/package/Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
+echo "Found Yadoms : $yadomsVersion"
+
 cd pi-gen
 
 # Generate FR image
@@ -13,6 +18,8 @@ sudo touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
 # copy stage99
 sudo cp -rp $DIR/stage99 .
+sudo cp ../builds/package/Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/03-yadoms/yadoms.tar.gz
+sudo chmod 777 ./stage99/03-yadoms/yadoms.tar.gz
 
 # generate image
 sudo ./build-docker.sh
