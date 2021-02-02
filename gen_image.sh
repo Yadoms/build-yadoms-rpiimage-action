@@ -1,16 +1,18 @@
 #!/bin/sh
+pwd
+ls -al
 
 cd pi-gen
 
 # Generate FR image
-cp ../config_fr
+sudo cp ../config_fr ./config
 
 # disable stage 3, 4 and 5
-touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
-touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
+sudo touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
+sudo touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
 # copy stage99
-cp -r ../stage99 .
+sudo cp -rp ../stage99 .
 
 # generate image
 sudo ./build-docker.sh
