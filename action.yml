@@ -1,0 +1,24 @@
+# buildyadoms.yml
+name: 'Yadoms build raspberryPI image script'
+description: 'Use to generate a preinstalled RaspberryPI raspbian image including Yadoms and fully configured'
+inputs:
+  branch_or_tag_name:  
+    description: 'The RPi-Distro/pi-gen tag/branch to use (default is master)'
+    required: false
+    default: 'master'
+runs:
+  using: "composite"
+  steps: 
+    - run: 'git clone --depth=1 -b ${{ inputs.branch_or_tag_name }} https://github.com/RPi-Distro/pi-gen.git '
+      name: 'Clone RPi-Distro/pi-gen'
+      shell: bash
+    - run: 'sudo apt-get install binfmt-support'
+      name: 'Install prerequisites'
+      shell: bash
+    - run: 'sh {{ github.action_path }}/gen_image.sh'
+      name: 'Generate image'
+      shell: bash
+branding:
+  icon : home
+  color: blue
+  
