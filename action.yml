@@ -6,6 +6,10 @@ inputs:
     description: 'The RPi-Distro/pi-gen tag/branch to use (default is master)'
     required: false
     default: 'master'
+  output_folder:  
+    description: 'The output folder in which image is moved'
+    required: false
+    default: ''    
 runs:
   using: "composite"
   steps: 
@@ -15,9 +19,9 @@ runs:
     - run: 'sudo apt-get install binfmt-support'
       name: 'Install prerequisites'
       shell: bash
-    - run: 'sh ${{ github.action_path }}/gen_image.sh'
+    - run: 'sh ${{ github.action_path }}/gen_image.sh ${{ inputs.output_folder }}'
       name: 'Generate image'
-      shell: bash
+      shell: bash      
 branding:
   icon : home
   color: blue
