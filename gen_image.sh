@@ -2,10 +2,17 @@
 
 cd pi-gen
 
-# Example for building a lite system
-echo "IMG_NAME='Raspbian'" > config
+# Generate FR image
+cp ../config_fr
+
+# disable stage 3, 4 and 5
 touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
 touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
+
+# copy stage99
+cp -r ../stage99 .
+
+# generate image
 sudo ./build-docker.sh
 
 if [ ! $# -eq 0 ]; then

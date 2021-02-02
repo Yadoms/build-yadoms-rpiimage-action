@@ -1,0 +1,4 @@
+IMG_NAME='Raspbian-EN'
+UNAME='yadoms'
+UPASS='yadoms2017'
+ENABLE_SSH=1

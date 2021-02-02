@@ -1,0 +1,38 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          yadoms
+# Required-Start:    $local_fs $remote_fs $network ntp
+# Required-Stop:     $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Yadoms daemon
+# Description:       Yadoms is an opensource domotic server solution.
+### END INIT INFO
+DESC="Yadoms daemon"
+NAME="yadoms"
+DAEMON=/opt/yadoms/$NAME
+
+case "$1" in
+    start)
+        # Stop the ntp service
+        sudo /etc/init.d/ntp stop
+        # Force the time synchronization
+        sudo ntpdate -s -t 20 fr.pool.ntp.org
+        # Restart the ntp service
+        sudo /etc/init.d/ntp start
+        # Start Yadoms as 'yadoms' user
+        sudo -u yadoms $DAEMON --daemon
+        ;;
+    stop)
+        # Executed commands launched with "stop" parameter (during system halt)
+        killall $NAME
+        ;;
+    reload|restart)
+        $0 stop
+        $0 start
+        ;;
+    *)
+        echo "Usage: $0 start|stop|restart|reload"
+        exit 1
+esac
+exit 0
