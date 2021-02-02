@@ -15,7 +15,8 @@ if [ ! $# -eq 0 ]; then
 	fi
 	
 	echo "Move resultig image to $1"
-    mv deploy/* $1
+    sudo mv deploy/* $1
+	sudo chmod -R 777 $1
 else
 	echo "No output folder provided"
 	echo "Deploy folder is $(pwd)/deploy"
