@@ -15,8 +15,11 @@ cd pi-gen
 sudo cp $DIR/config_fr ./config
 
 # disable stage 3, 4 and 5
-sudo touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
-sudo touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
+sudo rm -Rf stage3
+sudo rm -Rf stage4
+sudo rm -Rf stage5
+#sudo touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
+#sudo touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
 # copy stage99
 if [ -d "stage99" ]; then
@@ -27,6 +30,7 @@ sudo ls -al ../package
 sudo cp -rp $DIR/stage99 .
 sudo cp ../package/Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/03-yadoms/yadoms.tar.gz
 sudo chmod 777 ./stage99/03-yadoms/yadoms.tar.gz
+sudo mv stage99 stage3
 
 # generate image
 sudo ./build-docker.sh
