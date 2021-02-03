@@ -19,9 +19,11 @@ sudo touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
 sudo touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
 # copy stage99
-if [ -d "$DIR/stage99" ]; then
-	sudo rm -Rf $DIR/stage99
+if [ -d "stage99" ]; then
+	sudo rm -Rf stage99
 fi
+
+sudo ls -al ../package
 sudo cp -rp $DIR/stage99 .
 sudo cp ../package/Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/03-yadoms/yadoms.tar.gz
 sudo chmod 777 ./stage99/03-yadoms/yadoms.tar.gz
