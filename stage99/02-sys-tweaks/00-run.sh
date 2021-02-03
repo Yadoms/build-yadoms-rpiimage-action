@@ -80,9 +80,9 @@ uncomment 'retry 60;' ${ROOTFS_DIR}/etc/dhcp/dhclient.conf
 
 ######################################
 echo "Authorize user to shutdown..."
-sudo echo '[Allow all users to shutdown and reboot]' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
-sudo echo 'Identity=unix-user:*' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
-sudo echo 'Action=org.freedesktop.login1.power-off;org.freedesktop.login1.power-off-multiple-sessions;org.freedesktop.login1.reboot;org.freedesktop.login1.reboot-multiple-sessions' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
-sudo echo 'ResultAny=yes' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
+echo '[Allow all users to shutdown and reboot]' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
+echo 'Identity=unix-user:*' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
+echo 'Action=org.freedesktop.login1.power-off;org.freedesktop.login1.power-off-multiple-sessions;org.freedesktop.login1.reboot;org.freedesktop.login1.reboot-multiple-sessions' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
+echo 'ResultAny=yes' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
 
 
