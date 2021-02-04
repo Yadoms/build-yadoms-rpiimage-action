@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-echo "Creating user : $UNAME"
+echo "Creating user : ${UNAME}"
 
 # Add user $UNAME
 useradd -m ${UNAME} -s /bin/bash
