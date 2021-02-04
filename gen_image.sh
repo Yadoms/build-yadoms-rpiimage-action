@@ -4,8 +4,6 @@ DIR="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 
 
 #retreive version from currently built file
-pwd
-ls -al
 export yadomsVersion=`ls package/Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
 echo "Found Yadoms : $yadomsVersion"
 
@@ -29,7 +27,6 @@ if [ -d "stage99" ]; then
 	sudo rm -Rf stage99
 fi
 
-sudo ls -al ../package
 sudo cp -rp $DIR/stage99 .
 sudo cp ../package/Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/03-yadoms/yadoms.tar.gz
 sudo chmod 777 ./stage99/03-yadoms/yadoms.tar.gz
@@ -44,10 +41,33 @@ if [ ! $# -eq 0 ]; then
 	  mkdir -p $1
 	fi
 	
-	echo "Move resultig image to $1"
-    	sudo mv deploy/* $1
+	echo "Move resultig FR image to $1"
+    sudo mv deploy/* $1
 	sudo chmod -R 777 $1
 else
 	echo "No output folder provided"
 	echo "Deploy folder is $(pwd)/deploy"
 fi
+
+
+
+# Generate EN image
+sudo cp $DIR/config_en ./config
+
+# generate image
+sudo ./build-docker.sh
+
+if [ ! $# -eq 0 ]; then
+	if [ ! -d "$1" ]; then
+	  echo "Creating folder $1"
+	  mkdir -p $1
+	fi
+	
+	echo "Move resultig EN image to $1"
+    sudo mv deploy/* $1
+	sudo chmod -R 777 $1
+else
+	echo "No output folder provided"
+	echo "Deploy folder is $(pwd)/deploy"
+fi
+
