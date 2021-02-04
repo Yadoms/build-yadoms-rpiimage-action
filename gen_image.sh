@@ -21,6 +21,9 @@ sudo rm -Rf stage5
 #sudo touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
 #sudo touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
+#disable generation of raspbian-lite image (our custom stage will generate raspbian-lite-yadoms)
+sudo touch ./stage2/SKIP_IMAGES 
+
 # copy stage99
 if [ -d "stage99" ]; then
 	sudo rm -Rf stage99
