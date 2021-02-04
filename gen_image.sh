@@ -32,6 +32,10 @@ sudo cp ../package/Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/03-yadoms/
 sudo chmod 777 ./stage99/03-yadoms/yadoms.tar.gz
 sudo mv stage99 stage3
 
+if [ -d "work" ]; then
+	sudo rm -Rf work
+fi
+
 # generate image
 sudo ./build-docker.sh
 
@@ -53,6 +57,10 @@ fi
 
 # Generate EN image
 sudo cp $DIR/config_en ./config
+
+if [ -d "work" ]; then
+	sudo rm -Rf work
+fi
 
 # generate image
 sudo ./build-docker.sh
