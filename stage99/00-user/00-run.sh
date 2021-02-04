@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+UNAME='yadoms'
+UPASS='yadoms2017'
+
 echo "Creating user : ${UNAME}"
 
 # Add user $UNAME
