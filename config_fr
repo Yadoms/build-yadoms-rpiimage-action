@@ -1,6 +1,4 @@
 IMG_NAME='Raspbian-FR'
-UNAME='yadoms'
-UPASS='yadoms2017'
 LOCALE_DEFAULT='fr_FR.UTF-8'
 KEYBOARD_KEYMAP='fr'
 ENABLE_SSH=1
