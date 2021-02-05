@@ -17,6 +17,9 @@ inputs:
 runs:
   using: "composite"
   steps: 
+    - run: 'if [ -d "pi-gen" ]; then rm -Rf pi-gen; fi'
+      name: 'Cleanup'
+      shell: bash
     - run: 'git clone --depth=1 -b ${{ inputs.branch_or_tag_name }} https://github.com/RPi-Distro/pi-gen.git '
       name: 'Clone RPi-Distro/pi-gen'
       shell: bash
