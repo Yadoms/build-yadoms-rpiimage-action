@@ -75,6 +75,9 @@ fi
 # generate image
 sudo ./build-docker.sh
 
+#delete
+sudo docker rm -v pigen_work || true
+
 if [ $DEPLOY_TO_CUSTOM_DIR = "YES" ]; then
 	if [ ! -d "${DEPLOY_DIR}" ]; then
 	  echo "Creating folder ${DEPLOY_DIR}"
@@ -88,3 +91,6 @@ else
 	echo "No output folder provided"
 	echo "Deploy folder is $(pwd)/deploy"
 fi
+
+
+
