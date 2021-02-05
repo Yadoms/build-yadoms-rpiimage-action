@@ -10,6 +10,10 @@ inputs:
     description: 'The output folder in which image is moved'
     required: false
     default: ''    
+  language:
+    description: 'The image default language'
+    required: false
+    default: 'en'
 runs:
   using: "composite"
   steps: 
@@ -19,7 +23,7 @@ runs:
     - run: 'sudo apt-get install binfmt-support'
       name: 'Install prerequisites'
       shell: bash
-    - run: 'sh ${{ github.action_path }}/gen_image.sh ${{ inputs.output_folder }}'
+    - run: 'sh ${{ github.action_path }}/gen_image.sh --deploy="${{ inputs.output_folder }}" -l${{ inputs.language }} '
       name: 'Generate image'
       shell: bash      
 branding:
