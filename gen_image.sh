@@ -34,6 +34,9 @@ case $i in
 esac
 done
 
+echo "path= ${YADOMS_BINARY_PATH}"
+ls -al ${YADOMS_BINARY_PATH}
+
 #retreive version from currently built file
 export yadomsVersion=`ls ${YADOMS_BINARY_PATH}/Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
 echo "Found Yadoms : $yadomsVersion"
