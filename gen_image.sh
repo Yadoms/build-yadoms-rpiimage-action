@@ -41,6 +41,9 @@ ls -al ${YADOMS_BINARY_PATH}
 export yadomsVersion=`ls ${YADOMS_BINARY_PATH}/Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
 echo "Found Yadoms : $yadomsVersion"
 
+sudo cp ${YADOMS_BINARY_PATH}/Yadoms-$yadomsVersion-RaspberryPI.tar.gz pi-gen/stage99/02-yadoms/yadoms.tar.gz
+sudo chmod 777 pi-gen/stage99/02-yadoms/yadoms.tar.gz
+
 cd pi-gen
 
 if [ $LANG = "FR" ]; then
@@ -67,8 +70,8 @@ if [ -d "stage99" ]; then
 fi
 
 sudo cp -rp $DIR/stage99 .
-sudo cp ../package/Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/02-yadoms/yadoms.tar.gz
-sudo chmod 777 ./stage99/02-yadoms/yadoms.tar.gz
+#sudo cp ${YADOMS_BINARY_PATH}/Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/02-yadoms/yadoms.tar.gz
+#sudo chmod 777 ./stage99/02-yadoms/yadoms.tar.gz
 sudo mv stage99 stage3
 
 if [ -d "work" ]; then
