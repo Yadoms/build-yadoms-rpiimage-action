@@ -6,7 +6,7 @@ DIR="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 #manage command line arguements
 LANG=EN
 DEPLOY_TO_CUSTOM_DIR=NO
-YADOMS_BINARY_PATH=package
+YADOMS_BINARY_PATH=.
 
 for i in "$@"
 do
@@ -34,10 +34,8 @@ case $i in
 esac
 done
 
-echo "path= ${YADOMS_BINARY_PATH}"
-ls -al
-pwd
-ls -al builds
+echo "listing path= ${YADOMS_BINARY_PATH}"
+ls -al ${YADOMS_BINARY_PATH}
 
 #retreive version from currently built file
 export yadomsVersion=`ls ${YADOMS_BINARY_PATH}/Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
