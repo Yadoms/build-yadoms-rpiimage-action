@@ -6,7 +6,6 @@ DIR="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 #manage command line arguements
 LANG=EN
 DEPLOY_TO_CUSTOM_DIR=NO
-YADOMS_BINARY_PATH=.
 
 for i in "$@"
 do
@@ -24,25 +23,17 @@ case $i in
     DEPLOY_DIR="${i#*=}"
     shift
     ;;
-    -y=*|--yadoms-path=*)
-    YADOMS_BINARY_PATH="${i#*=}"
-    shift
-    ;;
     *)
           # unknown option
     ;;
 esac
 done
 
-echo "listing path= ${YADOMS_BINARY_PATH}"
-ls -al ${YADOMS_BINARY_PATH}
+ls -al
 
 #retreive version from currently built file
-export yadomsVersion=`ls ${YADOMS_BINARY_PATH}/Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
+export yadomsVersion=`ls Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
 echo "Found Yadoms : $yadomsVersion"
-
-sudo cp ${YADOMS_BINARY_PATH}/Yadoms-$yadomsVersion-RaspberryPI.tar.gz pi-gen/stage99/02-yadoms/yadoms.tar.gz
-sudo chmod 777 pi-gen/stage99/02-yadoms/yadoms.tar.gz
 
 cd pi-gen
 
@@ -70,8 +61,8 @@ if [ -d "stage99" ]; then
 fi
 
 sudo cp -rp $DIR/stage99 .
-#sudo cp ${YADOMS_BINARY_PATH}/Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/02-yadoms/yadoms.tar.gz
-#sudo chmod 777 ./stage99/02-yadoms/yadoms.tar.gz
+sudo cp ../Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/02-yadoms/yadoms.tar.gz
+sudo chmod 777 ./stage99/02-yadoms/yadoms.tar.gz
 sudo mv stage99 stage3
 
 if [ -d "work" ]; then
