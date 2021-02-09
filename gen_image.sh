@@ -69,6 +69,8 @@ sudo mv stage99 stage3
 #patch pi-gen (make it work within docker inside docker)
 sudo cp $DIR/patch/img_prerun.sh ./export-image/prerun.sh
 sudo cp $DIR/patch/noob_prerun.sh ./export-noobs/prerun.sh
+sudo chmod +x ./export-image/prerun.sh
+sudo chmod +x ./export-noobs/prerun.sh
 
 if [ -d "work" ]; then
 	sudo rm -Rf work
