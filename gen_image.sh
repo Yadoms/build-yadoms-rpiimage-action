@@ -66,6 +66,10 @@ sudo cp ../Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/02-yadoms/yadoms.t
 sudo chmod 777 ./stage99/02-yadoms/yadoms.tar.gz
 sudo mv stage99 stage3
 
+#patch pi-gen (make it work within docker inside docker)
+sudo cp $DIR/patch/img_prerun.sh ./export-image/prerun.sh
+sudo cp $DIR/patch/noob_prerun.sh ./export-noobs/prerun.sh
+
 if [ -d "work" ]; then
 	sudo rm -Rf work
 fi
