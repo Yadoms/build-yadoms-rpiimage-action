@@ -33,6 +33,7 @@ ls -al
 
 #retreive version from currently built file
 export yadomsVersion=`ls Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
+if [ $? -ne 0 ]; then echo "ERROR : Fail to find Yadoms binaries. Exit "; exit 1; fi
 echo "Found Yadoms : $yadomsVersion"
 
 cd pi-gen
@@ -69,12 +70,14 @@ if [ -d "work" ]; then
 	sudo rm -Rf work
 fi
 
+#detach any loop
+sudo losetup --detach-all
+
 # generate image
 sudo ./build-docker.sh
+if [ $? -ne 0 ]; then echo "ERROR : Fail to make Yadoms Raspian images. Exit "; exit 1; fi
 
-#delete
-sudo docker rm -v pigen_work || true
-
+#copy images to output folder
 if [ $DEPLOY_TO_CUSTOM_DIR = "YES" ]; then
 	if [ ! -d "${DEPLOY_DIR}" ]; then
 	  echo "Creating folder ${DEPLOY_DIR}"
@@ -88,6 +91,9 @@ else
 	echo "No output folder provided"
 	echo "Deploy folder is $(pwd)/deploy"
 fi
+
+#delete container
+sudo docker rm -v pigen_work || true
 
 
 
