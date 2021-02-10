@@ -86,7 +86,7 @@ echo "Listing dir"
 ls -al
 
 echo "Listing dir deploy"
-ls -al
+ls -al deploy
 
 
 #copy images to output folder
@@ -97,8 +97,10 @@ if [ $DEPLOY_TO_CUSTOM_DIR = "YES" ]; then
 	fi
 	
 	echo "Move resultig image to ${DEPLOY_DIR}"
-    sudo mv deploy/* ${DEPLOY_DIR}
+    	sudo mv deploy/* ${DEPLOY_DIR}
 	sudo chmod -R 777 ${DEPLOY_DIR}
+	echo "Listing DEPLOY_DIR : ${DEPLOY_DIR}"
+	ls -al 
 else
 	echo "No output folder provided"
 	echo "Deploy folder is $(pwd)/deploy"
