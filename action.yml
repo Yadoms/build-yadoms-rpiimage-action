@@ -23,12 +23,12 @@ runs:
     - run: 'git clone --depth=1 -b ${{ inputs.branch_or_tag_name }} https://github.com/RPi-Distro/pi-gen.git '
       name: 'Clone RPi-Distro/pi-gen'
       shell: bash
-    - run: 'sudo apt-get install binfmt-support'
+    - run: 'sudo apt update && sudo apt install -y quilt binfmt-support qemu-user-static debootstrap libarchive-tools'
       name: 'Install prerequisites'
       shell: bash
     - run: 'sh ${{ github.action_path }}/gen_image.sh --deploy="${{ inputs.output_folder }}" -l${{ inputs.language }} '
       name: 'Generate image'
-      shell: bash      
+      shell: bash
 branding:
   icon : home
   color: blue

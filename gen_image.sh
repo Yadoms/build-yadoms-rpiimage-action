@@ -29,8 +29,6 @@ case $i in
 esac
 done
 
-ls -al
-
 #retreive version from currently built file
 export yadomsVersion=`ls Yadoms*.tar.gz | head -1 | grep -oP '(?<=-).*(?=-)'`
 if [ $? -ne 0 ]; then echo "ERROR : Fail to find Yadoms binaries. Exit "; exit 1; fi
@@ -67,10 +65,10 @@ sudo chmod 777 ./stage99/02-yadoms/yadoms.tar.gz
 sudo mv stage99 stage3
 
 #patch pi-gen (make it work within docker inside docker)
-sudo cp $DIR/patch/img_prerun.sh ./export-image/prerun.sh
-sudo cp $DIR/patch/noob_prerun.sh ./export-noobs/prerun.sh
-sudo chmod +x ./export-image/prerun.sh
-sudo chmod +x ./export-noobs/prerun.sh
+#sudo cp $DIR/patch/img_prerun.sh ./export-image/prerun.sh
+#sudo cp $DIR/patch/noob_prerun.sh ./export-noobs/prerun.sh
+#sudo chmod +x ./export-image/prerun.sh
+#sudo chmod +x ./export-noobs/prerun.sh
 
 if [ -d "work" ]; then
 	sudo rm -Rf work
@@ -83,6 +81,14 @@ sudo losetup --detach-all
 sudo ./build.sh
 if [ $? -ne 0 ]; then echo "ERROR : Fail to make Yadoms Raspian images. Exit "; exit 1; fi
 
+echo "current dir = $(pwd)"
+echo "Listing dir"
+ls -al
+
+echo "Listing dir deploy"
+ls -al
+
+
 #copy images to output folder
 if [ $DEPLOY_TO_CUSTOM_DIR = "YES" ]; then
 	if [ ! -d "${DEPLOY_DIR}" ]; then
@@ -91,12 +97,14 @@ if [ $DEPLOY_TO_CUSTOM_DIR = "YES" ]; then
 	fi
 	
 	echo "Move resultig image to ${DEPLOY_DIR}"
-    	sudo mv deploy/* ${DEPLOY_DIR}
+    sudo mv deploy/* ${DEPLOY_DIR}
 	sudo chmod -R 777 ${DEPLOY_DIR}
 else
 	echo "No output folder provided"
 	echo "Deploy folder is $(pwd)/deploy"
 fi
+
+
 
 #delete container
 #sudo docker rm -v pigen_work || true
