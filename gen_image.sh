@@ -80,7 +80,7 @@ fi
 sudo losetup --detach-all
 
 # generate image
-sudo ./build-docker.sh
+sudo ./build.sh
 if [ $? -ne 0 ]; then echo "ERROR : Fail to make Yadoms Raspian images. Exit "; exit 1; fi
 
 #copy images to output folder
@@ -99,7 +99,7 @@ else
 fi
 
 #delete container
-sudo docker rm -v pigen_work || true
+#sudo docker rm -v pigen_work || true
 
 
 
