@@ -7,3 +7,18 @@ tar zxf yadoms.tar.gz -C "${ROOTFS_DIR}/opt/yadoms" --strip 2
 
 echo "Yadoms installed to /opt/yadoms"
 ls -al "${ROOTFS_DIR}/opt/yadoms"
+
+#Change files authz
+on_chroot <<EOF
+chown -R yadoms:yadoms /opt/yadoms
+chmod -R 777 /opt/yadoms
+EOF
+
+#Install init rc script to manage Yadoms
+install -m 755 files/yadoms	"${ROOTFS_DIR}/etc/init.d/"
+
+#Enable yadoms (autostart)
+on_chroot << EOF
+systemctl enable yadoms
+update-rc.d yadoms defaults
+EOF

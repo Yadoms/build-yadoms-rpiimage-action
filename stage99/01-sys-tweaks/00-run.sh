@@ -32,9 +32,7 @@ function comment
 
 ######################################
 echo "Deploy files to rootfs..."
-install -m 755 files/updatercd_once	"${ROOTFS_DIR}/etc/init.d/"
 install -m 755 files/etc/init.d/owfs	"${ROOTFS_DIR}/etc/init.d/"
-install -m 755 files/etc/init.d/yadoms	"${ROOTFS_DIR}/etc/init.d/"
 install -d				"${ROOTFS_DIR}/etc/dhcp/dhclient-exit-hooks.d"
 install -m 644 files/etc/dhcp/dhclient-exit-hooks.d/yadoms	"${ROOTFS_DIR}/etc/dhcp/dhclient-exit-hooks.d/"
 
@@ -86,3 +84,10 @@ echo 'Action=org.freedesktop.login1.power-off;org.freedesktop.login1.power-off-m
 echo 'ResultAny=yes' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all_all_users_to_shutdown_reboot.pkla
 
 
+#Enable OWFS (autostart)
+on_chroot << EOF
+systemctl enable owfs
+update-rc.d owfs defaults
+update-rc.d owserver defaults
+
+EOF
