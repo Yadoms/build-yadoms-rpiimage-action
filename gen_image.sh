@@ -52,7 +52,7 @@ sudo rm -Rf stage5
 #sudo touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
 #disable generation of raspbian-lite image (our custom stage will generate raspbian-lite-yadoms)
-#sudo touch ./stage2/SKIP_IMAGES 
+sudo touch ./stage2/SKIP_IMAGES 
 
 
 # copy stage99
@@ -64,7 +64,9 @@ sudo cp -rp $DIR/stage99 .
 sudo cp ../Yadoms-$yadomsVersion-RaspberryPI.tar.gz ./stage99/02-yadoms/yadoms.tar.gz
 sudo chmod 777 ./stage99/02-yadoms/yadoms.tar.gz
 sudo mv stage99 stage3
-sudo rm -f stage3/EXPORT_NOOBS
+if [ -f stage3/EXPORT_NOOBS ]; then
+	sudo rm -f stage3/EXPORT_NOOBS
+fi
 
 #patch pi-gen (make it work within docker inside docker)
 #sudo cp $DIR/patch/img_prerun.sh ./export-image/prerun.sh
