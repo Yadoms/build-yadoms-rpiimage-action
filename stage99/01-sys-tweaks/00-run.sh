@@ -48,7 +48,7 @@ echo 'enable_uart=1' >> ${ROOTFS_DIR}/boot/config.txt
 
 ######################################
 echo "Disable system logging to GPIO serial port to free the serial port..."
-sed -i 's/ console=\S*,115200//g' ${ROOTFS_DIR}/boot/cmdline.txt
+sed -i 's/console=\S*,115200 //g' ${ROOTFS_DIR}/boot/cmdline.txt
 
 
 ######################################
