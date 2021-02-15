@@ -9,7 +9,7 @@ echo "Yadoms installed to /opt/yadoms"
 ls -al "${ROOTFS_DIR}/opt/yadoms"
 
 #change yadoms hhtp port
-sed -i 's/port = 8080/port = 80/g' /opt/yadoms/yadoms.ini
+sed -i 's/port = 8080/port = 80/g' ${ROOTFS_DIR}/opt/yadoms/yadoms.ini
 
 #Change files authz
 on_chroot <<EOF
