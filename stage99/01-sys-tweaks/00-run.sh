@@ -33,8 +33,6 @@ function comment
 ######################################
 echo "Deploy files to rootfs..."
 install -m 755 files/etc/init.d/owfs	"${ROOTFS_DIR}/etc/init.d/"
-install -d				"${ROOTFS_DIR}/etc/dhcp/dhclient-exit-hooks.d"
-install -m 644 files/etc/dhcp/dhclient-exit-hooks.d/yadoms	"${ROOTFS_DIR}/etc/dhcp/dhclient-exit-hooks.d/"
 
 ######################################
 echo "Enable SSH..."
