@@ -20,6 +20,8 @@ case "$1" in
         sudo ntpdate -s -t 20 fr.pool.ntp.org
         # Restart the ntp service
         sudo /etc/init.d/ntp start
+        #Allow yadoms to listen on port <1024
+        sudo setcap 'cap_net_bind_service=+ep' $DAEMON
         # Start Yadoms as 'yadoms' user
         sudo -u yadoms $DAEMON --daemon
         ;;
