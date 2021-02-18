@@ -32,7 +32,7 @@ function comment
 
 ######################################
 echo "Deploy files to rootfs..."
-install -m 755 files/etc/init.d/owfs	"${ROOTFS_DIR}/etc/init.d/"
+install -m 755 files/etc/systemd/system/owserver.service.d/override.conf	"${ROOTFS_DIR}/etc/systemd/system/owserver.service.d"
 
 ######################################
 echo "Enable SSH..."
@@ -84,8 +84,10 @@ echo 'ResultAny=yes' >> ${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d/all
 
 #Enable OWFS (autostart)
 on_chroot << EOF
+systemctl stop owserver
+systemctl daemon-reload
 systemctl enable owfs
-update-rc.d owfs defaults
-update-rc.d owserver defaults
+systemctl enable owserver
+systemctl start owserver
 
 EOF
